@@ -39,6 +39,18 @@ public class ChatUtils {
         return varMessage(NamedTextColor.RED, NamedTextColor.DARK_RED, message, vars);
     }
 
+    /**
+     * Create an error message with vars.
+     * The colour of the message is RED, with the vars highlighted with DARK_RED.
+     *
+     * @param message the message, using %s as placeholder for the vars.
+     * @param vars the vars to add to the placeholders, must equal the number of placeholder symbols.
+     * @return the {@link Component} with the message, or null if the number of vars is incorrect.
+     */
+    public static Component error(String message, Component... vars) {
+        return varMessage(NamedTextColor.RED, message, vars);
+    }
+
     public static Component success(String message) {
         return colouredText(NamedTextColor.GREEN, message);
     }
