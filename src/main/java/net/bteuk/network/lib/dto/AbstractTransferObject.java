@@ -33,10 +33,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = PlotMessage.class, name = "PLOT_MESSAGE"),
     @JsonSubTypes.Type(value = PrivateMessage.class, name = "PRIVATE_MESSAGE"),
     @JsonSubTypes.Type(value = ReplyMessage.class, name = "REPLY_MESSAGE"),
-    @JsonSubTypes.Type(value = TeleportAcceptRequest.class, name = "TELEPORT_ACCEPT"),
-    @JsonSubTypes.Type(value = TeleportRejectRequest.class, name = "TELEPORT_REJECT"),
-    @JsonSubTypes.Type(value = TeleportRequestEvent.class, name = "TELEPORT_REQUEST"),
-    @JsonSubTypes.Type(value = TeleportRequestCancelEvent.class, name = "TELEPORT_REQUEST_CANCEL")
+    @JsonSubTypes.Type(value = TeleportEvent.class, name = "TELEPORT_EVENT")
 })
 public abstract class AbstractTransferObject {
 }
