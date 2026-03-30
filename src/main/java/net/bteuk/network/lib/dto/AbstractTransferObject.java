@@ -2,6 +2,7 @@ package net.bteuk.network.lib.dto;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import net.bteuk.network.lib.enums.ModerationAction;
 
 /**
  * Generic transfer object sent through the socket.
@@ -26,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = OnlineUsersReply.class, name = "ONLINE_USERS_REPLY"),
     @JsonSubTypes.Type(value = OnlineUserAdd.class, name = "ONLINE_USER_ADD"),
     @JsonSubTypes.Type(value = OnlineUserRemove.class, name = "ONLINE_USER_REMOVE"),
-    @JsonSubTypes.Type(value = OnlineUserRemove.class, name = "MODERATION_EVENT"),
+    @JsonSubTypes.Type(value = ModerationAction.class, name = "MODERATION_EVENT"),
     @JsonSubTypes.Type(value = FocusEvent.class, name = "FOCUS_EVENT"),
     @JsonSubTypes.Type(value = ServerStartup.class, name = "SERVER_STARTUP"),
     @JsonSubTypes.Type(value = ServerShutdown.class, name = "SERVER_SHUTDOWN"),
