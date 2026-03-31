@@ -27,7 +27,7 @@ import net.bteuk.network.lib.enums.ModerationAction;
     @JsonSubTypes.Type(value = OnlineUsersReply.class, name = "ONLINE_USERS_REPLY"),
     @JsonSubTypes.Type(value = OnlineUserAdd.class, name = "ONLINE_USER_ADD"),
     @JsonSubTypes.Type(value = OnlineUserRemove.class, name = "ONLINE_USER_REMOVE"),
-    @JsonSubTypes.Type(value = ModerationAction.class, name = "MODERATION_EVENT"),
+    @JsonSubTypes.Type(value = ModerationEvent.class, name = "MODERATION_EVENT"),
     @JsonSubTypes.Type(value = FocusEvent.class, name = "FOCUS_EVENT"),
     @JsonSubTypes.Type(value = ServerStartup.class, name = "SERVER_STARTUP"),
     @JsonSubTypes.Type(value = ServerShutdown.class, name = "SERVER_SHUTDOWN"),
