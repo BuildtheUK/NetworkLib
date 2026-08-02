@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
 
-public class AbstractSocketHandler extends Thread {
+public class AbstractSocketHandler implements Runnable {
 
     private final Socket clientSocket;
 
