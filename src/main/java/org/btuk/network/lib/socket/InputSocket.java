@@ -49,6 +49,9 @@ public class InputSocket {
                 // Ignored, the server is closing anyway.
             }
         }
+        if (acceptExecutor != null) {
+            acceptExecutor.shutdownNow();
+        }
         if (workerExecutor != null) {
             workerExecutor.shutdown();
             try {
