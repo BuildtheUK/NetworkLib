@@ -1,12 +1,15 @@
 package org.btuk.network.lib.socket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.java.Log;
+
 import org.btuk.network.lib.dto.AbstractTransferObject;
 
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.Socket;
 
+@Log
 public class OutputSocket {
 
     private final String ip;
@@ -29,7 +32,7 @@ public class OutputSocket {
             output.flush();
 
         } catch (IOException ex) {
-            System.out.println("Could not broadcast message to server socket!");
+            log.warning("Could not broadcast message to server socket!");
             return false;
         }
         return true;

@@ -1,5 +1,7 @@
 package org.btuk.network.lib.socket;
 
+import lombok.extern.java.Log;
+
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -8,28 +10,33 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+@Log
 public class InputSocket {
 
     private final int port;
 
     private ServerSocket serverSocket;
-    private ExecutorService executorService;
+    private ExecutorService acceptExecutor;
+    private ExecutorService workerExecutor;
 
     public InputSocket(int port) {
         this.port = port;
     }
 
     public void start(SocketHandler handler) {
-        executorService = Executors.newCachedThreadPool();
-        CompletableFuture.runAsync(() -> {
+        workerExecutor = Executors.newCachedThreadPool();
+        acceptExecutor = Executors.newSingleThreadExecutor();
+        acceptExecutor.submit(() -> {
             try {
                 serverSocket = new ServerSocket(port);
                 while (!serverSocket.isClosed()) {
                     Socket socket = serverSocket.accept();
-                    executorService.submit(new AbstractSocketHandler(socket, handler));
+                    workerExecutor.submit(new AbstractSocketHandler(socket, handler));
                 }
             } catch (IOException ex) {
-                //if (serverSocket == null) Proxy.getInstance().getLogger().warn("Could not bind port to socket!");
+                if (serverSocket == null || !serverSocket.isClosed()) {
+                    log.severe("InputSocket error on port " + port + ": " + ex.getMessage());
+                }
             }
         });
     }
@@ -42,14 +49,14 @@ public class InputSocket {
                 // Ignored, the server is closing anyway.
             }
         }
-        if (executorService != null) {
-            executorService.shutdown();
+        if (workerExecutor != null) {
+            workerExecutor.shutdown();
             try {
-                if (!executorService.awaitTermination(5, TimeUnit.SECONDS)) {
-                    executorService.shutdownNow();
+                if (!workerExecutor.awaitTermination(5, TimeUnit.SECONDS)) {
+                    workerExecutor.shutdownNow();
                 }
             } catch (InterruptedException e) {
-                executorService.shutdownNow();
+                workerExecutor.shutdownNow();
             }
         }
     }
