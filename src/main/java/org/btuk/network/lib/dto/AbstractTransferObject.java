@@ -40,7 +40,8 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
     @JsonSubTypes.Type(value = WaypointLocationResponse.class, name = "WAYPOINT_LOCATION_RESPONSE"),
     @JsonSubTypes.Type(value = WaypointTeleportEvent.class, name = "WAYPOINT_TELEPORT_EVENT"),
     @JsonSubTypes.Type(value = WaypointHologramUpdateEvent.class, name = "WAYPOINT_HOLOGRAM_UPDATE_EVENT"),
-    @JsonSubTypes.Type(value = WaypointHologramRequest.class, name = "WAYPOINT_HOLOGRAM_REQUEST")
+    @JsonSubTypes.Type(value = WaypointHologramRequest.class, name = "WAYPOINT_HOLOGRAM_REQUEST"),
+        @JsonSubTypes.Type(value = ProgressMapVerification.class, name = "PROGRESS_MAP_VERIFY")
 })
 public abstract class AbstractTransferObject {
 }
